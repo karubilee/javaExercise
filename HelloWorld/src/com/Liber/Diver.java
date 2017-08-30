@@ -36,5 +36,11 @@ public class Diver {
 		triple.setA("something");
 		triple.setB(1);
 		triple.setC(1.0f);
+		
+		//泛型方法
+		 Integer[] intArray = { 1, 2, 3, 4, 5 };  
+	     Character[] charArray = { 'T', 'I', 'A', 'N', 'M', 'A', 'Y', 'I', 'N', 'G' };
+	     Printer.printArray(intArray);
+	     Printer.printArray(charArray);
 	}
 }
