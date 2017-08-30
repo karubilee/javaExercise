@@ -25,7 +25,7 @@ public class Car {
 	}
 	
 	void run() {
-		startup();
+		this.startup();
 		System.out.println("start,speed: " + speed);
 	}
 }
