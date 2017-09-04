@@ -3,7 +3,7 @@ package com.Liber;
 public class Post {
 	String title; 
 	String content;
-	
+	long id;
 	private static int count = 0;
 	
 	void print() {
@@ -20,4 +20,9 @@ public class Post {
 	public static int getCount() {
 		return count;
 	}
+	
+	public  long getId() {
+		return id;
+	}
+	
 }
