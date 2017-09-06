@@ -1,7 +1,10 @@
 package com.Liber;
 
+import java.lang.reflect.Constructor;
+import java.sql.Date;
+import java.time.*;
 public class Diver {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Car car = new Car();
 		car.color = 0xffffff;
 		int color = car.color;
@@ -74,12 +77,56 @@ public class Diver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		class2 = new Car().getClass();
 		class3 = Car.class;
 		System.out.println("类名称   " + class1.getName());
 		System.out.println("类名称   " + class2.getName());
 		System.out.println("类名称   " + class3.getName());
 
+		// 实例化类对象
+		try {
+			Class<?> class4 = Class.forName("com.Liber.User");
+			// 第一种方法,这会调用类的默认构造方法;
+			User user = (User) class4.newInstance();
+			user.setAge(20);
+			user.setName("Liber");
+			System.out.println(user);
+
+			// 第二种方法,先取得全部构造函数,然后使用构造函数创建对象
+			Constructor<?> cons[] = class4.getConstructors();
+			for (int i = 0; i < cons.length; i++) {
+				// 查看每个构造方法需要的参数
+				Class<?> clazzs[] = cons[i].getParameterTypes();
+
+				// 打印构造函数的签名
+				System.out.print("cons[" + i + "] (");
+				for (int j = 0; j < clazzs.length; j++) {
+					if (j == clazzs.length - 1)
+						System.out.print(clazzs[j].getName());
+					else
+						System.out.print(clazzs[j].getName() + ",");
+				}
+				System.out.println(")");
+			}
+			// 调用构造函数
+			user = (User) cons[0].newInstance(20, "tianmaying");
+	        System.out.println(user);
+			user = (User) cons[1].newInstance("tianmaying");
+			System.out.println(user);
+			
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//日期处理
+		Clock clock = Clock.systemDefaultZone();
+		long millis = clock.millis();
+		Instant instant = clock.instant();
+		Date legacyDate = Date.from(instant);
+		
 	}
 
 	private static void fun() throws Exception {
